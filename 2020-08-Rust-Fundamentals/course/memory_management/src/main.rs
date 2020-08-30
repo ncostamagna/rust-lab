@@ -11,6 +11,9 @@ fn stack_only(b: i32) -> i32 {
 
 fn stack_and_heap() -> i32 {
     let d = 5;
+
+    // Box es un tipo de SMART POINTER
+    // se libera el espacio de memoria al salir  el scope del stack
     let e = Box::new(7);
     return d + *e;
 }
