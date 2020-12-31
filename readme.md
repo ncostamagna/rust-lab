@@ -240,6 +240,7 @@ dbg!(string_borrow);
 dbg!(string_literal);
 
 ```
+![imagen](images/2020-12-30-19-18-28.png)
 
 ### Enums
 En memoria, los enums representan un siemple numero, empezando por 0 hasta n+1
@@ -259,7 +260,7 @@ enum Method {
 let get = Method::GET;
 
 ```
-IMAGEN
+![imagen](images/2020-12-31-01-21-21.png)
 <br />
 
 ```rust
