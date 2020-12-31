@@ -62,6 +62,10 @@ rustup toolchain install nightly-x86_64-unknown-linux-gnu # instalamos tambien l
 
 ```
 
+ejecutamos lo siguiente para ejecutar en modo debug
+```bash
+gdb mars_calc
+```
 
 La carpeta **target** es como el node_module de node, donde van a estar nuestras dependencias
 
@@ -125,3 +129,114 @@ Heap almacenado en la direcccion de memoria
 ![imagen](images/1.jpg)
 
 Rust no es como java, javascript o Go que el heap se limpia automaticamente, nosotros en Rust tenemos que liberar el espacio de memoria, para esto podemos utilizar SMART POINTER (como Box::new), para que se libere el espacio de memoria una vez que la funcion se libere del stack
+
+# Leguaje
+
+### Tipos de datos
+
+- boolean
+- characters
+- integer
+- floats
+
+### Cargo expand
+Descargamos de github, nos ayuda a ver nuestro codigo expandido, con lo que hace internamente cada funcion como **println!**
+
+### Variables
+Las variables son inmutables por defecto, esto significa que los valores que se le asignan a una variable no pueden ser modificados, para eso debemos declararlo como mutable
+```rust
+let mut input = String::new();
+```
+Definir tipo de dato
+```rust
+// defino que es un flotante de 32bytes
+let weight: f32 = input.trim().parse().unwrap();
+```
+
+### Reglas
+
+- Each value in Rust is owned by a variable
+- When the owner goes out of scope, the value will be deallocated
+- There can only be ONE owner at a time (Solo debe haber un dueño del valor para las variables)
+
+```rust
+fn main(){
+    let mut input = String::new();
+    some_fn(input)
+
+    // me va a generar error porque ya utilice input arriba en some_fn
+    io::stdin().read_line(&mut input);
+}
+// pasa a ser el owner aca y pincha cuando queramos volver a utilizar input en el main
+fn some_fn(s: String){}
+```
+
+```rust
+fn main(){
+    let mut input = String::new();
+    some_fn(&mut input)
+
+    // me va a generar error porque ya utilice input arriba en some_fn
+    io::stdin().read_line(&mut input);
+}
+
+// de esta manera le definimos que no sea el owner
+
+// Si modificamos en la funcion se va a ver reflejado afuera
+fn some_fn(s: &mut String){}
+
+// Si modificamos en la funcion NO se va a ver reflejado afuera
+fn some_fn(s: &String){}
+```
+
+### Structs
+
+```rust
+
+struct MyStruct {
+    addr: String,
+
+}
+
+// bloque de implementacion
+impl MyStruct{
+
+    // generamos metodo new
+    // devuelve la instancia del struct
+    fn new(adde: String) -> Self{
+        Self {
+            //addr: addr
+            addr
+        }
+    }
+
+    // metodo del struct
+    // self representa la instancia del struct
+    // &self no lo toma como dueño (ownership) &mut self y lo toma como mutable
+    fn run(self){
+        println!("Listening in {}", self.addr);
+    }
+}
+```
+
+### String
+```rust
+let string = String::from("test");
+
+// string_slice hace borrow de string
+let string_slice = &string[10..14]; // desde el 10 hasta el 14 (str)
+// no significa que va hasta el caracter 10, significa que va hasta el byte 10
+// puede haber caracteres (letras japonesas, etc..) que tenga mas de un caracter
+// si corto el caracter a la mitad pincha el programa
+
+let string_borrow: &str = &string;
+let string_literal = "1234" // nuevo espacio de memoria, es inmutable
+
+dbg!(string); // por eso pincharia aca (lo tiene string_slice)
+// para eso deberiamos utilizar
+// dbg!(&string);
+dbg!(string_slice);
+dbg!(string_borrow);
+dbg!(string_literal);
+
+```
