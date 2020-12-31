@@ -10,7 +10,7 @@ use std::str::Utf8Error;
 pub struct Request<'buf> {
     path: &'buf str,
     query_string: Option<QueryString<'buf>>,
-    method: Method,
+    method: Method, //Enum
 }
 
 impl<'buf> Request<'buf> {

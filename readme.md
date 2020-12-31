@@ -240,3 +240,53 @@ dbg!(string_borrow);
 dbg!(string_literal);
 
 ```
+
+### Enums
+En memoria, los enums representan un siemple numero, empezando por 0 hasta n+1
+```rust
+enum Method {
+    GET,
+    PUT,
+    //POST,
+    POST = 5, // le puedo definir un valor, desde el get empezaria con 0 
+              // y a partir de aca iria de 5 (6,7,8,...)
+    DELETE,
+    OPTIONS,
+    HEAD,
+}
+
+// para traer el valor
+let get = Method::GET;
+
+```
+IMAGEN
+<br />
+
+```rust
+enum Method {
+    GET(String),
+    PUT(u64),
+    POST,
+    DELETE,
+    OPTIONS,
+    HEAD,
+}
+
+let get = Method::GET("asds".to_string());
+let delete = Method::DELETE(100);
+```
+
+**OPTION ENUM**<br />
+Representa **None** si no hay valores y **Some** si tiene algun valor
+```rust
+//option.rs
+pub enum Option<T> {
+    None,
+    Some(T),
+}
+```
+```rust
+struct Request {
+    query_string: Option<String>
+}
+```
