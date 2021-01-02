@@ -130,19 +130,17 @@ Heap almacenado en la direcccion de memoria
 
 Rust no es como java, javascript o Go que el heap se limpia automaticamente, nosotros en Rust tenemos que liberar el espacio de memoria, para esto podemos utilizar SMART POINTER (como Box::new), para que se libere el espacio de memoria una vez que la funcion se libere del stack
 
-# Leguaje
-
-### Tipos de datos
+# Tipos de datos
 
 - boolean
 - characters
 - integer
 - floats
 
-### Cargo expand
+# Cargo expand
 Descargamos de github, nos ayuda a ver nuestro codigo expandido, con lo que hace internamente cada funcion como **println!**
 
-### Variables
+# Variables
 Las variables son inmutables por defecto, esto significa que los valores que se le asignan a una variable no pueden ser modificados, para eso debemos declararlo como mutable
 ```rust
 let mut input = String::new();
@@ -153,7 +151,7 @@ Definir tipo de dato
 let weight: f32 = input.trim().parse().unwrap();
 ```
 
-### Reglas
+# Reglas
 
 - Each value in Rust is owned by a variable
 - When the owner goes out of scope, the value will be deallocated
@@ -189,7 +187,7 @@ fn some_fn(s: &mut String){}
 fn some_fn(s: &String){}
 ```
 
-### Structs
+# Structs
 
 ```rust
 
@@ -219,7 +217,7 @@ impl MyStruct{
 }
 ```
 
-### String
+# String
 ```rust
 let string = String::from("test");
 
@@ -242,7 +240,7 @@ dbg!(string_literal);
 ```
 ![imagen](images/2020-12-30-19-18-28.png)
 
-### Enums
+# Enums
 En memoria, los enums representan un siemple numero, empezando por 0 hasta n+1
 ```rust
 enum Method {
@@ -277,7 +275,7 @@ let get = Method::GET("asds".to_string());
 let delete = Method::DELETE(100);
 ```
 
-**OPTION ENUM**<br />
+### OPTION ENUM
 Representa **None** si no hay valores y **Some** si tiene algun valor
 ```rust
 //option.rs
@@ -289,5 +287,147 @@ pub enum Option<T> {
 ```rust
 struct Request {
     query_string: Option<String>
+}
+```
+
+# Modules
+Por defecto los metodos y funciones son privadas, si necesito que sean publicas debo indicarselo
+```rust
+fn main(){
+    let server = mystruct::MyStruct::new("sarasa");
+}
+
+// genero otro namespace con los modulos, en este caso mystruct
+mod mystruct{
+
+    // por defecto son privadas, debo indicarlas como publicas
+    pub struct MyStruct {
+        addr: String,
+
+    }
+
+    impl MyStruct{
+
+        pub fn new(adde: String) -> Self{
+            Self {
+                addr
+            }
+        }
+
+        pub fn run(self){
+            println!("Listening in {}", self.addr);
+        }
+    }
+}
+```
+Podemos utilizar **use** para no tener que llamar a todo el modulo siempre
+```rust
+use mystruct::MyStruct
+
+fn main(){
+    let server = MyStruct::new("sarasa");
+}
+```
+### Sub Moduls
+```rust
+mod http {
+    pub mod request {
+        struct Request {
+            path: String,
+            query_string: Option<String>,
+            // con super hacemos referencia al modulo padre
+            method: super::method::Method,
+        }
+    }
+
+    pub mod method {
+        pub enum Method {
+            GET,
+            PUT,
+            POST,
+            DELETE,
+            OPTIONS,
+            HEAD,
+        }
+    }
+}
+
+```
+
+### Modules files
+El modulo sera el mismo nombre que el archivo
+```rust
+//server.rs
+
+pub struct Server {
+    addr: String,
+
+}
+
+impl Server{
+
+    pub fn new(adde: String) -> Self{
+        Self {
+            addr
+        }
+    }
+
+    pub fn run(self){
+        println!("Listening in {}", self.addr);
+    }
+}
+
+```
+
+```rust
+// main.rs
+
+use server::Server;
+
+// el mismo nombre del archivo, para hacer referencia a el
+mod server;
+
+fn main(){
+    let server = Server::new("sarasa");
+}
+```
+
+
+### Sub Modules files
+Creamos el folder http y dentro los archivos request.rs y method.rs<br />
+para eso debemos crear un archivo **mod.rs**
+```rust
+//http/method.rs
+
+pub enum Method {
+    GET,
+    PUT,
+    POST,
+    DELETE,
+    OPTIONS,
+    HEAD,
+}
+```
+
+```rust
+//http/mod.rs
+pub use request:Request;
+pub use method:Method;
+
+pub mod request;
+pub mod method;
+```
+
+```rust
+// main.rs
+
+use http::Request;
+use http::Method;
+
+// el mismo nombre del folder, para hacer referencia a el
+mod http;
+
+fn main(){
+    // TODO
 }
 ```
