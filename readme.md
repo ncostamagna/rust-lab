@@ -1,14 +1,18 @@
 # Indice
 - [Introduccion](#introduccion)
-- [V8 y JavaScript Engines](#v8-y-javascript-engines)
-- [NodeJS](#nodejs)
-- [ES6](#es6)
-- [Autentificacion](#autentificacion)
-- [Unit Test](#unit-test)
-- [Sincronia vs Asicnronia](#sincronia-vs-asicnronia)
-- [Base de datos](#base-de-datos)
-- [Arquitectura Apis](#arquitectura-apis)
-- [Microservicios](#microservicios)
+- [Instalacion](#instalacion)
+- [Memoria](#memoria)
+- [Tipos de datos](#tipos-de-datos)
+- [Cargo expand](#cargo-expand)
+- [Variables](#variables)
+- [Reglas](#reglas)
+- [Structs](#structs)
+- [String](#string)
+- [Enums](#enums)
+- [Modules](#modules)
+- [Errors](#errors)
+- [Loops](#loops)
+- [Tuples](#tuples)
 
 
 # Introduccion
@@ -429,5 +433,61 @@ mod http;
 
 fn main(){
     // TODO
+}
+```
+
+# Errors
+Se dividen en 2 categorias:
+- recoverable: ej-> file not found
+- unrecoverable: ej-> intentar ingresar a un index mas alla de donde termina el array
+<br />
+
+**RUST NO SOPORTA EXCEPCIONES**<br />
+Podemos utilizar el enum **Result**
+```rust
+pub enum Result<T, E> {
+    Ok(T), //Success value
+    Err(E) //Error value
+}
+```
+
+# Loops
+
+```rust
+// Loop infinito
+loop {
+    // TODO
+}
+
+// Podemos utilizar los breaks para salir
+loop {
+    break;
+}
+
+// Podemos hacer referecia al loop padre para salir de el desde el hijo
+'outer: loop {
+    loop {
+        break 'outer;
+    }
+}
+
+// Al igual que hacer un continue
+'outer: loop {
+    loop {
+        continue 'outer;
+    }
+}
+```
+
+# Tuples
+Puedo tener varios tipos de datos
+```rust
+let tup = (5, "String", listener);
+```
+
+```rust
+
+fn run() -> (i32, &str, std::net::TcpListener) {
+    (5, "a", listener)
 }
 ```
