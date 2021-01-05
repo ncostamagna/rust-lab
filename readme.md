@@ -491,3 +491,46 @@ fn run() -> (i32, &str, std::net::TcpListener) {
     (5, "a", listener)
 }
 ```
+
+# Match
+Nos sirve para controlar las Tuples
+
+```rust
+// listenet.accept() nos devuelve una tupla de 2 valores,
+// nos ayuda a manejar los enums
+// en este caso solo tenemos Ok y Err
+match listenet.accept() {
+    // Ok tiene dos valores en este caso de la tupla (TcpStream y SocketAddr)
+    Ok( (stream, _) ) => {
+        // para ignorar utilizamos _ como en Golang
+    },
+    Err(e) => {
+        println!("{}", e)
+    },
+    _ => {
+        // ninguna de las variantes anteriores
+    }
+}
+
+
+
+match "abdc" {
+    "abdc" => {},
+    "a" | "b" => {}, //or
+    _ => {},
+}
+```
+
+# Arrays
+En Rust siempre debemos definir el tamaño del array y el contenido que va a tener al inicializar (y evitar que tenga basura como en C)<br /><br />
+https://stackoverflow.com/questions/34684261/how-to-set-a-rust-array-length-dynamically
+```rust
+let a = [1,2,3,4]; //[i32, 4] [tipo de dato, size]
+
+fn arr(a: [u8; 5]){} //debemos definirle el tipo y el tamaño
+
+//Si queremos pasar el array y no sabemos el tamaño tenemos que pasarle la referencia
+fn arr(a: &[u8]) {}
+
+let mut buffer = [0;1024] // debemos definir al inicializar el tamaño del array, en este caso 1024 (1024 bytes, y le asignamos todos los valores en 0
+```
