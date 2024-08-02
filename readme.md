@@ -25,7 +25,10 @@
 - Buen manejador de paquetes (como npm)
 
 # Instalacion
-Debemos entrar al sitio oficial de rust  y realizar las inastalaciones
+You can install rust from the oficial site: https://www.rust-lang.org/learn/get-started
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 ```sh
 rustc --version # Compilador
@@ -35,8 +38,8 @@ rustup --version # instalador, podemos actualizar rustc o cargo
 
 Instalamos la extension **rust**, **better TOML** y **crates** del VS Code
 
-### Creamos proyecto
-Utilizaremos cargo
+### Create new project
+We use cargo
 
 ```sh
 cargo new my-project
