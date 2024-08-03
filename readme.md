@@ -16,6 +16,7 @@
 
 
 # Introduccion
+https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html#using-a-crate-to-get-more-functionality
 
 ### Rust
 - Rapido y manejo de memoria eficiente
@@ -36,7 +37,9 @@ cargo --version # manejador de paquetes
 rustup --version # instalador, podemos actualizar rustc o cargo
 ```
 
-Instalamos la extension **rust**, **better TOML** y **crates** del VS Code
+Instalamos la extension **rust**, **better TOML** y **crates** del VS Code. <br />
+
+Standart libraries: https://doc.rust-lang.org/std/prelude/index.html
 
 ### Create new project
 We use cargo
@@ -59,6 +62,7 @@ Tenemos las dependencias, metadatas y config de compilacion, podemos ir agregand
 ```sh
 cargo build # instalamos dependencias
 cargo run # compilamos
+cargo check # quickly check
 
 cargo install cargo-expand # instalamos con cargo directamente
 
