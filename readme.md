@@ -16,7 +16,7 @@
 
 
 # Introduccion
-https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html#using-a-crate-to-get-more-functionality
+https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
 
 ### Rust
 - Rapido y manejo de memoria eficiente
@@ -63,6 +63,8 @@ Tenemos las dependencias, metadatas y config de compilacion, podemos ir agregand
 cargo build # instalamos dependencias
 cargo run # compilamos
 cargo check # quickly check
+
+cargo update # update the dependencies
 
 cargo install cargo-expand # instalamos con cargo directamente
 
