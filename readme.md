@@ -85,6 +85,18 @@ La carpeta **target** es como el node_module de node, donde van a estar nuestras
 
 # Memoria
 
+## Variables
+
+- Mutable Variable: The same memory location is reused and updated.
+- Constant: Stored in a read-only section of memory.
+- Shadowing: Each shadowed variable gets a new memory location, and previous variables are no longer accessible within the new scope.
+
+```
+Mutable Variable (mut): When you declare a variable as mutable and update its value, the same memory location is reused. This means that no additional memory is allocated for the new value; the existing memory is simply updated.
+
+Shadowing: When you shadow a variable, a new memory location is allocated for each new value. The previous variable is no longer accessible within the new scope, but it still occupies memory until it goes out of scope and is cleaned up by Rust's ownership system.
+```
+
 ### Stack
 
 ```rust
@@ -149,6 +161,20 @@ Rust no es como java, javascript o Go que el heap se limpia automaticamente, nos
 - characters
 - integer
 - floats
+
+
+| Length | Signed | Unsigned |
+|--------|--------|----------|
+| 8-bit  | i8     | u8       |
+| 16-bit | i16    | u16      |
+| 32-bit | i32    | u32      |
+| 64-bit | i64    | u64      |
+| 128-bit | i128  | u128     |
+| arch   | isize  | usize    |
+
+
+
+
 
 # Cargo expand
 Descargamos de github, nos ayuda a ver nuestro codigo expandido, con lo que hace internamente cada funcion como **println!**
