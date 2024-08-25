@@ -83,6 +83,14 @@ gdb mars_calc
 La carpeta **target** es como el node_module de node, donde van a estar nuestras dependencias
 
 
+# Common Concept
+
+## Statements and Expressions
+
+- Statements are instructions that perform some action and do not return a value.
+- Expressions evaluate to a resultant value. Let’s look at some examples.
+
+
 # Memoria
 
 ## Variables
