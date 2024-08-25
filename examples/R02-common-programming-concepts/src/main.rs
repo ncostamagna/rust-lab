@@ -86,4 +86,20 @@ fn main() {
     let aai = [3; 5]; // let a = [3, 3, 3, 3, 3];
     let el2 = aai[0];
     println!("The value of aai[0] is: {el2}");
+
+    // ############
+    // FUNCTIONS
+    // ############
+    another_function(5);
+
+    print_labeled_measurement(5, 'm');
+}
+
+// im rust we use snake case for function names
+fn another_function(x: i32) {
+    println!("The value of x is: {x}");
+}
+
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is: {value}{unit_label}");
 }
