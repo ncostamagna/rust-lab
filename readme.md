@@ -171,6 +171,75 @@ Heap almacenado en la direcccion de memoria
 
 Rust no es como java, javascript o Go que el heap se limpia automaticamente, nosotros en Rust tenemos que liberar el espacio de memoria, para esto podemos utilizar SMART POINTER (como Box::new), para que se libere el espacio de memoria una vez que la funcion se libere del stack
 
+## Reference and Borrowing
+we can use reference to access a some value without lose the ownership
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{s1}' is {len}.");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+if we want to change the value, we must use mut
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+**Mutable references have one big restriction: if you have a mutable reference to a value, you can have no other references to that value.**
+
+```rust
+let mut s = String::from("hello");
+
+    let r1 = &mut s;
+    let r2 = &mut s; // ERROR: second mutable borrow occurs here
+
+    println!("{}, {}", r1, r2);
+```
+
+As always, we can use curly brackets to create a new scope, allowing for multiple mutable references, just not simultaneous ones:
+
+```rust
+let mut s = String::from("hello");
+
+    {
+        let r1 = &mut s;
+    } // r1 goes out of scope here, so we can make a new reference with no problems.
+
+    let r2 = &mut s;
+
+```
+
+Rust enforces a similar rule for combining mutable and immutable references. This code results in an error:
+
+```rust
+let mut s = String::from("hello");
+
+let r1 = &s; // no problem
+let r2 = &s; // no problem
+let r3 = &mut s; // BIG PROBLEM
+
+println!("{}, {}, and {}", r1, r2, r3);
+
+```
+
+
 # Tipos de datos
 
 - boolean
