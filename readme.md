@@ -90,8 +90,8 @@ La carpeta **target** es como el node_module de node, donde van a estar nuestras
 - Statements are instructions that perform some action and do not return a value.
 - Expressions evaluate to a resultant value. Let’s look at some examples.
 
-
-# Memoria
+# Ownership
+Ownership in Rust is a system of rules that govern memory management, ensuring that programs use memory efficiently without the need for garbage collection or manual memory management. The Rust compiler enforces these rules, and if they are violated, the program will not compile. This system helps create safe and efficient code without affecting runtime performance. Although ownership may be challenging to grasp initially, becoming familiar with it is crucial for mastering Rust’s unique features. The concept is introduced through examples, particularly focusing on string data structures.
 
 ## Variables
 
@@ -104,6 +104,14 @@ Mutable Variable (mut): When you declare a variable as mutable and update its va
 
 Shadowing: When you shadow a variable, a new memory location is allocated for each new value. The previous variable is no longer accessible within the new scope, but it still occupies memory until it goes out of scope and is cleaned up by Rust's ownership system.
 ```
+
+
+## Stack & Heap
+In Rust, understanding the stack and the heap is crucial due to its role as a systems programming language. The stack and heap are two types of memory used during runtime. The stack operates on a last-in, first-out basis, storing data in a fixed order and removing it in reverse. It is fast but requires data to have a known, fixed size. The heap, on the other hand, is more flexible but less organized. It allows for storing data with unknown or variable sizes by allocating space dynamically and returning a pointer to that space.
+<br /><br />
+Stack operations are faster because they occur in a predefined order, while heap operations are slower as they involve searching for available memory and managing pointers. Data on the heap must be accessed via pointers, making it slower to retrieve compared to data on the stack.
+<br /><br />
+When a function is called, its parameters and local variables are stored on the stack. Once the function finishes, this data is removed. Ownership in Rust manages heap data, ensuring that memory is efficiently allocated and deallocated, minimizing duplication, and preventing memory leaks. While Rust’s ownership model simplifies memory management, understanding the stack and heap provides insight into why Rust operates the way it does.
 
 ### Stack
 
@@ -192,6 +200,25 @@ You can write integer literals in any of the forms shown in Table 3-2. Note that
 | Binary          | 0b1111_0000   |
 | Byte (u8 only)  | b'A'          |
 
+## String
+
+```rust
+let s = "hello"
+```
+
+- Type: &str (string slice)
+- Description: This is a string slice, which is a reference to a string literal. String literals are stored in the binary's read-only memory and are immutable, fast and efficient.
+- Memory: The string data is stored in the program's binary and is not allocated on the heap.
+- Usage: String slices are typically used for static strings that do not need to be modified.
+
+```rust
+let s = String::from("hello")
+```
+
+- Type: String
+- Description: This is a String object, which is a growable, mutable, owned string type. It is part of Rust's standard library.
+- Memory: The string data is allocated on the heap, and the String object owns this data. The memory is automatically managed and freed when the String goes out of scope.
+- Usage: String is used when you need a mutable string that can be modified or when you need to perform operations that require ownership of the string dat
 
 # Cargo expand
 Descargamos de github, nos ayuda a ver nuestro codigo expandido, con lo que hace internamente cada funcion como **println!**
