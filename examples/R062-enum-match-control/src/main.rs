@@ -14,6 +14,7 @@ enum Coin {
 
 fn main() {
     value_in_cents(Coin::Penny);
+    other_example(29);
 }
 
 fn value_in_cents(coin: Coin) -> u8 {
@@ -28,6 +29,28 @@ fn value_in_cents(coin: Coin) -> u8 {
         Coin::Quarter(state) => {
             println!("State quarter from {state:?}!");
             25
+        }
+    }
+
+
+
+   
+}
+
+fn other_example(dice_roll: u8) -> u8 {
+    match dice_roll {
+        3 =>{ 
+            println!("You rolled a 3!");
+            3
+        },
+        7 => {
+            println!("You rolled a 7!");
+            7
+        }
+        // we can use _ if we don't want the value
+        other => {
+            println!("You rolled a {}!", other);
+            other
         }
     }
 }
