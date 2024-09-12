@@ -516,6 +516,12 @@ A package is a bundle of one or more crates that provides a set of functionality
 we can declare new modules with **mod** for example **mod garden** <br />
 We can create semimodules for example: mod vegetables; in src/garden.rs <br />
 
+## Libraries
+If we want to create a new library, we use
+
+```sh
+cargo new R071-restaurant --lib
+```
 
 # Modules
 Por defecto los metodos y funciones son privadas, si necesito que sean publicas debo indicarselo
