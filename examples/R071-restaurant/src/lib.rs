@@ -10,6 +10,20 @@ crate
          └── take_payment
 */
 
+
+// external packages
+/*
+use std::cmp::Ordering;
+use std::io;
+use std::{cmp::Ordering, io};
+
+use std::io;
+use std::io::Write;
+use std::io::{self, Write};
+
+use std::collections::*;
+
+*/
 mod front_of_house {
     pub mod hosting {
        pub fn add_to_waitlist() {}
@@ -26,12 +40,23 @@ mod front_of_house {
     }
 }
 
+use crate::front_of_house::hosting;
+
+// we can add directluy the function
+// use crate::front_of_house::hosting::add_to_waitlist;
+
+// re exporting with pub
+// pub use crate::front_of_house::hosting;
+
 pub fn eat_at_restaurant() {
     // Absolute path
     crate::front_of_house::hosting::add_to_waitlist();
 
     // Relative path
     front_of_house::hosting::add_to_waitlist();
+
+    // with use
+    hosting::add_to_waitlist();
 }
 
 fn deliver_order() {}

@@ -512,6 +512,18 @@ The crate root is a source file that the Rust compiler starts from and makes up 
 ## Packages
 A package is a bundle of one or more crates that provides a set of functionality. A package contains a Cargo.toml file that describes how to build those crates. Cargo is actually a package that contains the binary crate for the command-line tool you’ve been using to build your code. The Cargo package also contains a library crate that the binary crate depends on. Other projects can depend on the Cargo library crate to use the same logic the Cargo command-line tool uses.
 
+```rust
+use std::cmp::Ordering;
+use std::io;
+use std::{cmp::Ordering, io}; // we can do it
+
+use std::io;
+use std::io::Write;
+use std::io::{self, Write}; // we can do it
+
+use std::collections::*; // If we want to bring all public items defined in a path into scope
+```
+
 ## Modules
 we can declare new modules with **mod** for example **mod garden** <br />
 We can create semimodules for example: mod vegetables; in src/garden.rs <br />
