@@ -528,6 +528,11 @@ use std::collections::*; // If we want to bring all public items defined in a pa
 we can declare new modules with **mod** for example **mod garden** <br />
 We can create semimodules for example: mod vegetables; in src/garden.rs <br />
 
+```
+src/front_of_house.rs (what we covered)
+src/front_of_house/mod.rs (older style, still supported path)
+```
+
 ## Libraries
 If we want to create a new library, we use
 
