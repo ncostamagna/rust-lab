@@ -697,6 +697,33 @@ pub enum Result<T, E> {
 }
 ```
 
+## Unrecoverable
+immediately aborting, the `RUST_BACKTRACE` environment variable to get a backtrace of exactly what happened to cause the error
+```
+RUST_BACKTRACE=1 cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running `target/debug/R090-errors`
+thread 'main' panicked at src/main.rs:4:6:
+index out of bounds: the len is 3 but the index is 99
+stack backtrace:
+   0: rust_begin_unwind
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/std/src/panicking.rs:652:5
+   1: core::panicking::panic_fmt
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/core/src/panicking.rs:72:14
+   2: core::panicking::panic_bounds_check
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/core/src/panicking.rs:274:5
+   3: <usize as core::slice::index::SliceIndex<[T]>>::index
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/core/src/slice/index.rs:248:10
+   4: core::slice::index::<impl core::ops::index::Index<I> for [T]>::index
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/core/src/slice/index.rs:17:9
+   5: <alloc::vec::Vec<T,A> as core::ops::index::Index<I>>::index
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/alloc/src/vec/mod.rs:2905:9
+   6: R090_errors::main
+             at ./src/main.rs:4:6
+   7: core::ops::function::FnOnce::call_once
+             at /rustc/3f5fd8dd41153bc5fdca9427e9e05be2c767ba23/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+```
 # Loops
 
 ```rust
